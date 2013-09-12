@@ -1,12 +1,12 @@
 <%@page import="net.bitacademy.java41.vo.Project"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>프로젝트 정보</title>
-<link rel="stylesheet" href="<%=application.getContextPath()%>/style.css">
+<link rel="stylesheet" href="${rootPath}/css/style.css">
 </head>
 <body>
 <jsp:include page="/header.jsp"></jsp:include>
@@ -15,23 +15,31 @@
 
 <div id="content">
 <h1>프로젝트 정보</h1>
-<jsp:useBean id="project" 
-		scope="request" 
-		type="net.bitacademy.java41.vo.Project"></jsp:useBean>
-번호: <%=project.getNo() %><br>
-프로젝트명: <%=project.getTitle() %><br>
+번호: ${project.no}<br>
+프로젝트명: ${project.title }<br>
 내용:<br> 
-<%=project.getContent() %><br>
-시작일: <%=project.getStartDate() %><br>
-종료일: <%=project.getEndDate() %><br>
-태그: <%=project.getTag() %><br>
-</div>
+${project.content }<br>
+시작일: ${project.startDate }<br>
+종료일: ${project.endDate }<br>
+태그: ${project.tag }<br>
 
-<div>
-
+<p>
+<a href="list.do">[목록]</a>
+<a href="update.do?no=${project.no}">[변경]</a>
+<a href="delete.do?no=${project.no}">[삭제]</a>
+</p>
 </div>
 
 <jsp:include page="/tail.jsp"></jsp:include>
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+

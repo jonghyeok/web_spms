@@ -1,13 +1,13 @@
 <%@page import="net.bitacademy.java41.vo.Project"%>
-<%@page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>프로젝트 목록</title>
-<link rel="stylesheet" href="<%=application.getContextPath()%>/style.css">
+<link rel="stylesheet" href="${rootPath}/css/style.css">
 </head>
 <body>
 <jsp:include page="/header.jsp"></jsp:include>
@@ -16,9 +16,6 @@
 
 <div id="content">
 <h1>프로젝트</h1>
-
-
-<jsp:useBean id="list" scope="request" type="java.util.List"></jsp:useBean>
 <table>
 <tr>
 	<th>번호</th>
@@ -26,15 +23,18 @@
 	<th>시작</th>
 	<th>종료</th>
 </tr>
-<%for(Project project : (List<Project>)list) {%>
+<c:forEach var="project" items="${list}">
 <tr>
-	<td><%=project.getNo()%></td>
-	<td><%=project.getTitle()%></td>
-	<td><%=project.getStartDate()%></td>
-	<td><%=project.getEndDate()%></td>
+	<td>${project.no}</td>
+	<td><a href="view.do?no=${project.no}">${project.title}</a></td>
+	<td>${project.startDate}</td>
+	<td>${project.endDate}</td>
 </tr>	
-<%}%>
+</c:forEach>
 </table>
+
+<p><a href="${rootPath}/project/addForm.do">[신규 프로젝트]</a></p>
+
 </div>
 
 <jsp:include page="/tail.jsp"></jsp:include>

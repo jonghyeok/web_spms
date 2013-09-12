@@ -4,12 +4,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>시스탬 오류!</title>
+<title>시스템 오류!</title>
 </head>
 <body>
-<P>사용자 요청 처리중에 오류가 발생하였습니다.<br>
-잠시 후 다시 요청하시기 바랍니다.</P>
-
+<p>
+사용자 요청 처리중에 오류가 발생하였습니다.<br>
+잠시후 다시 요청하시기 바랍니다.
+</p>
 
 </body>
 </html>
