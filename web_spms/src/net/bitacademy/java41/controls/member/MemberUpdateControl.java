@@ -2,6 +2,8 @@ package net.bitacademy.java41.controls.member;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import net.bitacademy.java41.controls.PageControl;
 import net.bitacademy.java41.services.MemberService;
 import net.bitacademy.java41.vo.Member;
@@ -24,9 +26,13 @@ public String execute(Map<String, Object> model) throws Exception {
 	@SuppressWarnings("unchecked")
 	Map<String,String[]> params = 
 			(Map<String,String[]>)model.get("params");
-	Member member = (Member)model.get("memberInfo");
+	
+	HttpSession session = (HttpSession) model.get("session");
+	
+	Member member = (Member)session.getAttribute("memberInfo");
 	
 	String email = member.getEmail();
+	System.out.println(email);
 	String name = params.get("name")[0];
 	String tel =params.get("tel")[0];
 	String blog = params.get("blog")[0];

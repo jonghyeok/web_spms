@@ -49,9 +49,7 @@ public class MemberDao {
 		} finally {
 			try {rs.close();} catch (Exception e) {}
 			try {stmt.close();} catch (Exception e) {}
-			if (con != null) {
-				conPool.returnConnection(con);
-			}
+
 		}		
 	}
 	
@@ -81,9 +79,7 @@ public class MemberDao {
 			
 		} finally {
 			try {stmt.close();} catch(Exception e) {}
-			if (con != null) {
-				conPool.returnConnection(con);
-			}
+
 		}
 	}
 	
@@ -119,9 +115,7 @@ public class MemberDao {
 		} finally {
 			try {rs.close();} catch (Exception e) {}
 			try {stmt.close();} catch (Exception e) {}
-			if (con != null) {
-				conPool.returnConnection(con);
-			}
+
 		}
 	}
 
@@ -133,7 +127,7 @@ public class MemberDao {
 		try {
 			con = conPool.getConnection();
 			stmt = con.prepareStatement(
-					"select EMAIL,MNAME,TEL,BLOG,REG_DATE,DET_ADDR,TAG,LEVEL"
+					"select EMAIL,MNAME,TEL,BLOG,REG_DATE,DET_ADDR,TAG,LEVEL,PWD"
 					+ " from SPMS_MEMBS"
 					+ " where EMAIL=?");
 			stmt.setString(1, email);
@@ -148,6 +142,7 @@ public class MemberDao {
 								.setRegDate(rs.getDate("REG_DATE"))
 								.setDetailAddress(rs.getString("DET_ADDR"))
 								.setTag(rs.getString("TAG"))
+								.setPassword(rs.getString("PWD"))
 								.setLevel(rs.getInt("LEVEL"));
 				return member;
 				
@@ -160,9 +155,7 @@ public class MemberDao {
 		} finally {
 			try {rs.close();} catch (Exception e) {}
 			try {stmt.close();} catch (Exception e) {}
-			if (con != null) {
-				conPool.returnConnection(con);
-			}
+
 		}
 	}
 	
@@ -187,9 +180,7 @@ public class MemberDao {
 		
 		} finally {
 			try {stmt.close();} catch(Exception e) {}
-			if (con != null) {
-				conPool.returnConnection(con);
-			}
+
 		}
 	}
 	
@@ -227,9 +218,7 @@ public class MemberDao {
 			
 		} finally {
 			try {stmt.close();} catch(Exception e) {}
-			if (con != null) {
-				conPool.returnConnection(con);
-			}
+
 		}
 	}
 	
@@ -260,10 +249,7 @@ try {
 
 } finally {
 	try {stmt.close();} catch(Exception e) {}
-	if (con != null) {
-		conPool.returnConnection(con);
-	}
-}
+
 }
 	
 	/*
@@ -318,6 +304,7 @@ try {
 		}
 	}
 */
+	}
 }
 
 

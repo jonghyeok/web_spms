@@ -24,20 +24,43 @@ public class updateMyInfoControl implements PageControl {
 		
 		Member member = memberService.getMember(params.get("email")[0]);
 		
-		String pwd = params.get("password")[0];
+		System.out.println(member.getEmail());
 		
+		String pwd = params.get("password")[0]; 
+		
+		System.out.println(pwd + "  -   " + member.getPassword());
 		if(pwd.equals(null)){
 			model.put("status", "pwdnull");
+			
 			
 		}else if(pwd.equals(member.getPassword())){
 			
 			String name = params.get("name")[0];
 			String tel = params.get("tel")[0];
 			String blog = params.get("blog")[0];
-			String detailAddress =params.get("detailAddress")[0];
-			String tag = params.get("tag")[0];
+			String detailAddress = null;
+			String tag = null;
 			String email = member.getEmail();
 			int level = member.getLevel();
+/*
+			if(params.get("blog")[0] == null){
+				blog="";
+			}else{
+				
+				blog = params.get("blog")[0];
+			}
+			
+			if(params.get("detailAddress")[0] == null){
+				detailAddress="";
+			}else{
+				detailAddress=params.get("detailAddress")[0];
+			}
+			
+			if(params.get("tag")[0] == null){
+				tag="";
+			}else{
+				tag=params.get("tag")[0];
+			}*/
 			
 			
 			memberService.memberUpdate(name, tel, blog, detailAddress, tag, email, level);
