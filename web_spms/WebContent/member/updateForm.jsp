@@ -19,9 +19,9 @@
 
 <h1>개인정보 변경</h1>
 
-<form action="updateMyInfo" method="post">
+<form action="updateMyInfo.do" method="post">
 이메일: <input type="text" name="email" value="${member.email}" readonly><br>
-암호: <input type="password" name="password" value="${member.password }"> <a href="<%=application.getContextPath()%>/member/passwordChange?email=<%=member.getEmail() %>">암호 변경</a><br>
+암호: <input type="password" name="password" value="${member.password }"> <a href="<%=application.getContextPath()%>/member/passwordChange.do?email=<%=member.getEmail() %>">암호 변경</a><br>
 이름: <input type="text" name="name" value="${member.name }"><br>
 전화: <input type="text" name="tel" value="${member.tel }"><br>
 블로그: <input type="text" name="blog" value="${member.blog }"><br>

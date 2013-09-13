@@ -8,7 +8,7 @@
 <div class="main_nav">
 <img id="memberPhoto" src="${rootPath}/images/test01.png">
 <div id="memberInfo">
-<p id="name"><a href="${rootPath}/member/updateMyInfo.do?email=${member.email }">${member.name}</a></p>
+<p id="name"><a href="${rootPath}/member/updateMyInfoForm.do?email=${member.email }">${member.name}</a></p>
 <p id="tel">${member.tel }</p>
 <p id="email">${member.email }</p>
 </div>

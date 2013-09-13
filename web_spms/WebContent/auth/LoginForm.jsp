@@ -9,7 +9,7 @@
 <title>로그인</title>
 </head>
 <body>
-<h1>사용자 로그인2</h1> 
+<h1>사용자 로그인 - 2조</h1> 
 <form action='login.do' method="post"> 
 Email: <input type="text" name="email"
 	<c:if test="${email != ''}">value='${email}'</c:if>

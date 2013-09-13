@@ -64,7 +64,7 @@ public class ContextLoaderListener implements ServletContextListener {
 		ctx.setAttribute("memberService", memberService);
 		ctx.setAttribute("projectService", projectService);
 		
-		ctx.setAttribute("/auth/loginForm.do", new LoginFormControl());
+		ctx.setAttribute("/auth/LoginForm.do", new LoginFormControl());
 		ctx.setAttribute("/auth/login.do", 
 				new LoginControl().setAuthService(authService));
 		ctx.setAttribute("/auth/logout.do", new LogoutControl());
@@ -93,8 +93,8 @@ public class ContextLoaderListener implements ServletContextListener {
 		ctx.setAttribute("/member/update.do",new MemberUpdateFormControl().setMemberService(memberService));
 		ctx.setAttribute("/member/update2.do", new MemberUpdateControl().setMemberService(memberService));
 		
-		ctx.setAttribute("/member/myupdateForm.do", new updateMyInfoFormControl());
-		ctx.setAttribute("/member/myupdate.do", new updateMyInfoControl().setMemberService(memberService));
+		ctx.setAttribute("/member/updateMyInfoForm.do", new updateMyInfoFormControl());
+		ctx.setAttribute("/member/updateMyInfo.do", new updateMyInfoControl().setMemberService(memberService));
 		ctx.setAttribute("/project/deleteForm.do", new ProjectDeleteFormControl());
 		ctx.setAttribute("/project/delete.do", 
 				new ProjectDeleteControl().setProjectService(projectService));
