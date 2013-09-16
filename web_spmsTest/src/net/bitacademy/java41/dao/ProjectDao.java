@@ -14,6 +14,7 @@ import net.bitacademy.java41.vo.Project;
 
 public class ProjectDao {
 	DBConnectionPool conPool;
+
 	
 	public ProjectDao setDBConnectionPool(DBConnectionPool conPool) {
 		this.conPool = conPool;
@@ -37,7 +38,7 @@ public class ProjectDao {
 			con = conPool.getConnection();
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(
-					"select PNO,TITLE,START_DATE,END_DATE"
+					"select PNO,TITLE,CONTENT,START_DATE,END_DATE"
 					+ " from SPMS_PRJS"
 					+ " order by PNO desc");
 			
@@ -45,6 +46,7 @@ public class ProjectDao {
 				list.add(new Project()
 							.setNo(rs.getInt("PNO"))
 							.setTitle(rs.getString("TITLE"))
+							.setContent(rs.getString("CONTENT"))
 							.setStartDate(rs.getDate("START_DATE"))
 							.setEndDate(rs.getDate("END_DATE")));
 			}

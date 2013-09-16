@@ -33,9 +33,26 @@
 
 <p>
 <a href="list.do">[목록]</a>
+
+<c:choose>
+<c:when test="${memberInfo.level == 0 && email==memberInfo.email}">
+<a href="passwordChange.do?email=${memberInfo.email}">[암호변경]</a>
+<a href="updateMyInfoForm.do?email=${memberInfo.email}">[변경]</a>
+<a href="delete.do?email=${memberInfo.email}">[삭제]</a>
+</c:when>
+<c:when test="${memberInfo.level == 1}">
 <a href="passwordChange.do?email=${memberInfo.email}">[암호변경]</a>
 <a href="update.do?email=${memberInfo.email}">[변경]</a>
 <a href="delete.do?email=${memberInfo.email}">[삭제]</a>
+</c:when>
+<c:when test="${memberInfo.level == 2}">
+<a href="updateMyInfoForm.do?email=${memberInfo.email}">[변경]</a>
+<a href="delete.do?email=${memberInfo.email}">[삭제]</a>
+</c:when>
+<c:otherwise></c:otherwise>
+</c:choose>
+
+
 </p>
 </div>
 

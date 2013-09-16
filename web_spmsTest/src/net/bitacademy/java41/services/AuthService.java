@@ -12,6 +12,7 @@ public class AuthService {
 	}
 	
 	public Member getUserInfo(String email, String password) throws Exception {
+		System.out.println("AUTH서비스 진입");
 		return memberDao.getMember(email, password);
 	}
 }

@@ -10,7 +10,6 @@ public class DBConnectionPool {
 	String id;
 	String pwd;
 	String driverClass;
-
 	ArrayList<Connection> list = new ArrayList<Connection>();
 	Hashtable<Thread, Connection> rentTable = new Hashtable<Thread, Connection>();
 
@@ -18,6 +17,7 @@ public class DBConnectionPool {
 	
 	public DBConnectionPool(String dburl, String id, String pwd,
 			String driverClass) {
+		System.out.println("DB풀 받아옴");
 		this.dburl = dburl;
 		this.id = id;
 		this.pwd = pwd;

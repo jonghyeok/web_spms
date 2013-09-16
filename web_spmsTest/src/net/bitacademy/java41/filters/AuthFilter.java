@@ -24,7 +24,7 @@ public class AuthFilter implements Filter {
 			FilterChain next) throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) resp;
-		
+		System.out.println("AUTH필터 진입");
 		Member member = (Member)request.getSession().getAttribute("member");
 		if (member != null || /*로그인 했다면*/
 				request.getServletPath().startsWith("/auth") || /* 로그인/로그아웃 요청인 경우*/ 

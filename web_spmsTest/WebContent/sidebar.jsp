@@ -6,7 +6,7 @@
 <% pageContext.setAttribute("myprojects", projectService.getMyProjects(member.getEmail()));%>	
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <div class="main_nav">
-<img id="memberPhoto" src="${rootPath}/images/test01.png">
+<img id="memberPhoto" src="${rootPath}/images/images.jpg">
 <div id="memberInfo">
 <p id="name"><a href="${rootPath}/member/updateMyInfoForm.do?email=${member.email }">${member.name}</a></p>
 <p id="tel">${member.tel }</p>
@@ -30,8 +30,7 @@
 		<div>관리</div>
 		<a href="${rootPath}/member/list.do">멤버관리</a>
 		<a href="${rootPath}/project/list.do">프로젝트관리</a>
-		<a href=""><li>test</li></a>
-		<a href=""><li>test</li></a>
+
 	</div>
 	</c:when>
 </c:choose>

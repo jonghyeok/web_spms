@@ -16,13 +16,13 @@
 <div class="content">
 
 <h1>프로젝트 수정</h1>
-<form action="update.do" method="post">
-번호: ${project.no}<br>
+<form action="update2.do" method="post">
+프로젝트 번호: ${project.no}<input type="hidden" name="no" value="${project.no}"><br>
 프로젝트명: <input type="text" name="title" value="${project.title }" required><br>
-내용:<br><textarea name="content" rows="4" cols="50" ></textarea><br>
+내용:<br><textarea name="content" rows="4" cols="50">${project.content }</textarea><br>
 시작일: <input type="date" name="startDate" value="${project.startDate }" required><br>
 종료일: <input type="date" name="endDate" value="${project.endDate }"required><br>
-태그: <input type="text" name="tag" placeholder="예)태그1 태그2 태그3 (공백으로 구분)"><br><br>
+태그: <input type="text" name="tag" value="${project.tag }"><br><br>
 <input type="submit" value="변경">
 <a href="list.do"><input type="button" value="목록"></a><br><br>
 </form>

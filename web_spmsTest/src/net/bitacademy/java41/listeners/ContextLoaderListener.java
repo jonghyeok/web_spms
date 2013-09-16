@@ -18,8 +18,8 @@ public class ContextLoaderListener implements ServletContextListener {
 	@Override
 	public void contextInitialized(ServletContextEvent event) {
 		ctx = event.getServletContext();
+		System.out.println("콘텍스트 리스너 진입");
 		ctx.setAttribute("rootPath", ctx.getContextPath());
-		
 		try {
 			prepareObjects(
 					ctx.getRealPath("/WEB-INF/context.properties"));
@@ -33,6 +33,7 @@ public class ContextLoaderListener implements ServletContextListener {
 	
 	private void saveToContext() {
 		Enumeration<String> keyList = objTable.keys();
+		System.out.println("콘택스트 저장");
 		String key = null;
 		while(keyList.hasMoreElements()) {
 			key = keyList.nextElement();
@@ -42,6 +43,7 @@ public class ContextLoaderListener implements ServletContextListener {
 
 	private void prepareDependancy() throws Exception {
 		Collection<Object> objList = objTable.values();
+		System.out.println("프리페얼 디펜던시");
 		for(Object obj : objList) {
 			if (obj.getClass() != java.lang.String.class) {
 				injectDependancy(obj);

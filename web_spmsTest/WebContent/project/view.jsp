@@ -2,6 +2,7 @@
 <%@page import="net.bitacademy.java41.vo.ProjectMember" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,12 +16,11 @@
 <jsp:include page="/sidebar.jsp"></jsp:include>
 
 <div class="content">
-<div id="submenu">
-<p>
+
 <a href="view.do?no=${project.no}">[기본정보]</a> |
-<a href="../task/list.do?projectNo=${project.no}">[작업들]</a> |
+<a href="../task/list.do?no=${project.no}">[작업들]</a> |
 <a href="../feed/list.do?projectNo=${project.no}">[게시판]</a>
-</div>
+
 <h1>프로젝트 정보</h1>
 번호: ${project.no}<br>
 프로젝트명: ${project.title }<br>
@@ -52,10 +52,25 @@ ${project.content }<br>
 <%} %>
 </table>
 
+
 <p>
 <a href="list.do">[목록]</a>
+
+<c:choose>
+<c:when test="${member.level == 0}">
+
+</c:when>
+<c:when test="${member.level == 1}">
 <a href="update.do?no=${project.no}">[변경]</a>
 <a href="delete.do?no=${project.no}">[삭제]</a>
+</c:when>
+<c:when test="${member.level == 2}">
+<a href="update.do?no=${project.no}">[변경]</a>
+<a href="delete.do?no=${project.no}">[삭제]</a>
+</c:when>
+<c:otherwise>손님</c:otherwise>
+</c:choose>
+
 </p>
 </div>
 

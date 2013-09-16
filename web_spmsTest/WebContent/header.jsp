@@ -6,12 +6,12 @@
 </div>
 
 <div class="header">
-	<span>SPMS</span>
+	<span><a href="${rootPath}/main.do">SPMS</a></span>
 </div>
 
 <div class="menu">
 	<span class="home">
-	<a href="${rootPath}/main">Home</a></span> 
+	<a href="${rootPath}/main.do">Home</a></span> 
 	<span class="alt"><a href="#">About Us</a></span> 
 	<span class="alt"><a href="#">News</a></span> 
 	<span class="alt"><a href="#">Contact</a></span> 

@@ -196,3 +196,28 @@ div.logout{
 	padding: 10px;
 	margin-left: 100px;
 }
+
+#chosen {
+border-radius:10px;
+width:45px;
+padding-top:10px; padding-bottom:10px;
+background-color:  #eee;
+
+text-align:center;
+color:black;
+font-weight:bold;
+font-size:large;
+margin-left:40px;
+}
+
+#slider {
+margin-left:10px;
+}
+
+/*this is only for webkit, not opera*/
+input[type='range'] {  
+-webkit-appearance: none;
+padding-left:2px; padding-right:2px;
+-webkit-border-radius: 5px;  
+background-image: -webkit-linear-gradient(top, #000000, #333333, #000000);
+}  

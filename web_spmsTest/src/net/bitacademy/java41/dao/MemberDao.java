@@ -32,7 +32,7 @@ public class MemberDao {
 		try {
 			con = conPool.getConnection();
 			stmt = con.prepareStatement(
-					"select EMAIL,MNAME,TEL,LEVEL from SPMS_MEMBS "
+					"select EMAIL,MNAME,TEL,BLOG,REG_DATE,DET_ADDR,TAG,LEVEL from SPMS_MEMBS "
 							+ " where EMAIL=? and PWD=?"); // ? -> in-parameter
 			stmt.setString(1, email);
 			stmt.setString(2, password);
@@ -43,6 +43,10 @@ public class MemberDao {
 				.setEmail(rs.getString("EMAIL"))
 				.setName(rs.getString("MNAME"))
 				.setTel(rs.getString("TEL"))
+				.setBlog(rs.getString("BLOG"))
+				.setRegDate(rs.getDate("REG_DATE"))
+				.setDetailAddress(rs.getString("DET_ADDR"))
+				.setTag(rs.getString("TAG"))
 				.setLevel(rs.getInt("LEVEL"));
 
 				return member;

@@ -1,6 +1,7 @@
 <%@page import="net.bitacademy.java41.vo.Project"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +26,12 @@
 </form>
 <p>
 <a href="view.do?email=${param.email}">[이전]</a>
+<c:choose>
+<c:when test="${member.level <0}">
 <a href="list.do">[목록]</a></p>
+</c:when>
+</c:choose>
+
 </div>
 
 <jsp:include page="/tail.jsp"></jsp:include>
