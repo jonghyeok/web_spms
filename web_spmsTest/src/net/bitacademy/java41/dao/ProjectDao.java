@@ -95,50 +95,53 @@ public class ProjectDao {
 	
 	public int update
 	(String title, String content, Date startDate, Date endDate, String tag, int no) throws Exception {
-		Connection con = null;
-		PreparedStatement stmt = null;
+		System.out.println(title+" - "+ content +" - "+startDate+" - "+no);
 		
+		
+		
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		
+		HashMap<String, Object> params = new HashMap<String,Object>();
+		params.put("title", title);
+		params.put("content", content);
+		params.put("startDate", startDate);
+		params.put("endDate", endDate);
+		params.put("tag", tag);
+		params.put("no", no);
+
 		try {
-			stmt = con.prepareStatement(
-				"update SPMS_PRJS set"
-				+ " TITLE=?,CONTENT=?,START_DATE=?,END_DATE=?,TAG=?"
-				+ " where PNO=?");
-			stmt.setString(1, title);
-			stmt.setString(2, content);
-			stmt.setDate(3, startDate);
-			stmt.setDate(4, endDate);
-			stmt.setString(5, tag);
-			stmt.setInt(6, no);
-			return stmt.executeUpdate();
+			int rsn = sqlSession.update("net.bitacademy.java41.dao.ProjectMapper.update", params);
+			sqlSession.commit();
+			return rsn;
 
 		} catch (Exception e) {
 			throw e;
 		
 		} finally {
-			try {stmt.close();} catch(Exception e) {}
+			try {sqlSession.close();} catch(Exception e) {}
 		}
 	}
+	
+	
 	public int delete(int no) throws Exception {
-		Connection con = null;
-		PreparedStatement stmt = null;
-		
+		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
-			stmt=con.prepareStatement("SET FOREIGN_KEY_CHECKS=0;");
-			stmt.executeUpdate();
+			sqlSession.delete(
+					"net.bitacademy.java41.dao.ProjectMapper.deleteProjectMember", no);
+			sqlSession.delete(
+					"net.bitacademy.java41.dao.ProjectMapper.delete", no);
 			
-			stmt = con.prepareStatement(
-				"delete from SPMS_PRJS"
-				+ " where PNO=?");
-			stmt.setInt(1, no);
-			
-			return stmt.executeUpdate();
-			
+			sqlSession.commit();
+			return 1;
 		} catch (Exception e) {
+			sqlSession.rollback();
 			throw e;
 			
 		} finally {
-			try {stmt.close();} catch(Exception e) {}
+			try {sqlSession.close();} catch (Exception e) {}
+			
 		}
+	
 	}
 /*
 	

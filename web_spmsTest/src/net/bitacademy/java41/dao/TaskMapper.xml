@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.bitacademy.java41.dao.TaskMapper">
+	<update id="updateTask" parameterType="Task" >
+		update spms_tasks set TITLE=#{title}, UIPROTOURL=#{uiProtoUrl},
+							 CONTENT=#{content},START_DATE=#{startDate},
+							 END_DATE=#{endDate}, DRAW_DATE=now(),
+							 STATUS=#{status}  
+					where TNO=#{tno}
+	</update>	
+	
+	<delete id="deleteMemberTask" parameterType="int"  >
+		delete from SPMS_MEMBTASK where tno=#{value}
+		
+	</delete>
+	
+	<delete id="deleteTask" parameterType="int"  >
+		delete from SPMS_TASKS where tno=#{value}
+		
+	</delete>
+	
+	<select id="listTask" parameterType="int" resultType="Task">
+		select t1.TNO, t1.TITLE, t2.EMAIL, t1.START_DATE as startDate,
+				t1.END_DATE as endDate, t1.DRAW_DATE as drawDate, t1.STATUS 
+		from spms_tasks t1, spms_membtask t2
+		where t1.TNO = t2.TNO and t1.PNO = #{pno}
+	</select>
+	
+	<select id="getTask" parameterType="int" resultType="Task">
+		select t1.TNO, t1.PNO, t1.TITLE, t2.EMAIL, 
+			t1.START_DATE as startDate, t1.UIPROTOURL, t1.CONTENT, 
+			t1.END_DATE as endDate, t1.DRAW_DATE as drawDate, t1.STATUS
+		from spms_tasks t1, spms_membtask t2 where t1.TNO = #{no} and t2.TNO = #{no}
+	</select>
+	
+	<insert id="addTask" parameterType="Task" useGeneratedKeys="true" keyProperty="tno">
+		insert into SPMS_TASKS(PNO,TITLE,UIPROTOURL,CONTENT,START_DATE,END_DATE,STATUS)
+					values(#{pno},#{title},#{uiProtoUrl},#{content},#{startDate},#{endDate},#{status})
+	</insert>
+	
+	<insert id="addMemberTask" parameterType="Task" >
+		insert into SPMS_MEMBTASK(TNO,EMAIL,PNO) 
+						values(#{tno},#{email},#{pno})
+	</insert>
+	
+</mapper>
+

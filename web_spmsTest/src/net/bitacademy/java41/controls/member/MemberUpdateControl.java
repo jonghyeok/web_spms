@@ -29,7 +29,10 @@ public String execute(Map<String, Object> model) throws Exception {
 	Map<String,String[]> params = 
 			(Map<String,String[]>)model.get("params");
 	
+	
 	String email = params.get("email")[0];
+
+	
 	System.out.println(email);
 	Member member = memberService.getMember(params.get("email")[0]);
 	
@@ -46,10 +49,12 @@ public String execute(Map<String, Object> model) throws Exception {
 		blog=params.get("blog")[0];
 	}
 	
+	System.out.println(params.get("blog")[0]);
+	
 	if(params.get("tel")[0]==null & params.get("tel")[0]==""){
 		tel="";
 	}else{
-		blog=params.get("tel")[0];
+		tel=params.get("tel")[0];
 	}
 	System.out.println(params.get("detailAddress")[0]);
 	if(params.get("detailAddress")[0]==null && params.get("detailAddress")[0]==""){
@@ -61,13 +66,13 @@ public String execute(Map<String, Object> model) throws Exception {
 	if(params.get("tag")[0]==null & params.get("tag")[0]==""){
 		tag="";
 	}else{
-		blog=params.get("tag")[0];
+		tag=params.get("tag")[0];
 	}
 	
 	if(params.get("level")[0]==null & params.get("level")[0]==""){
 		level=0;
 	}else{
-		blog=params.get("level")[0];
+		level=Integer.parseInt(params.get("level")[0]);
 	}
 	
 
@@ -86,4 +91,3 @@ public String execute(Map<String, Object> model) throws Exception {
 	
 
 }
-

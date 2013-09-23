@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Refresh" content="2;url=view.do?email=${member.email}">
+<meta http-equiv="Refresh" content="3;url=view.do?email=${member.email}">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>멤버 정보 변경</title>
 <link rel="stylesheet" href="${rootPath}/css/style.css">

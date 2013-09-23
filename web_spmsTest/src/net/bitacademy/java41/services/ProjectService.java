@@ -60,7 +60,7 @@ public class ProjectService {
 		return projectDao.update(title, content, startDate, endDate, tag, no);
 	}
 	
-	public ArrayList<ProjectMember> getView(int no) throws Exception {
+	public List<ProjectMember> getView(int no) throws Exception {
 		return projectMemberDao.getView(no);
 	}
 }

@@ -17,6 +17,37 @@
 		insert into SPMS_MEMIMG(EMAIL,IMGURL)
 		values(#{email},#{path})
 	</insert>
+	
+	<select id="list" resultType="Member">
+		select EMAIL, MNAME as name ,TEL,BLOG from SPMS_MEMBS 
+							 order by MNAME
+	</select>	
+	
+	<select id="get" parameterType="string" resultType="Member">
+		select EMAIL,MNAME as name,TEL,BLOG,REG_DATE as regDate,DET_ADDR as detailAddress ,
+				TAG,LEVEL,PWD as password
+		from  SPMS_MEMBS
+		where EMAIL=#{value}
+	</select>
+	
+	<update id="changePassword" parameterType="map">
+		update SPMS_MEMBS set PWD=#{newPassword},UPDATE_DATE=now() where EMAIL=#{email} and PWD=#{oldPassword}
+	</update>
+	
+	<delete id="delete" parameterType="string">
+		delete from SPMS_PRJMEMB where EMAIL=#{value}
+	</delete>
+	
+	<delete id="deleteMember" parameterType="string">
+		delete from SPMS_MEMBS where EMAIL=#{value}
+	</delete>
+	
+	<update id="memberUpdate" parameterType="map">
+	update SPMS_MEMBS 
+	set  MNAME=#{name},TEL=#{tel},BLOG=#{blog},DET_ADDR=#{detailAddress},TAG=#{tag},LEVEL=#{level} 
+	where EMAIL=#{email}
+	</update>
+	
 </mapper>
 
 

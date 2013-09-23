@@ -29,7 +29,7 @@
 		<input type="button" value="우편번호찾기"><br>
 상세주소: <input type="text" name="detailAddr" value="${member.detailAddress}"><br>
 태그: <input type="text" name="tag" value="${member.tag }"><br>
-<input type="submit" value="등록">
+<input type="submit" value="변경">
 <input type="reset" value="초기화">
 </form>
 

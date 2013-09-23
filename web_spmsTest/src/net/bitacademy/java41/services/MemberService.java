@@ -1,6 +1,5 @@
 package net.bitacademy.java41.services;
 
-import java.sql.Connection;
 import java.util.List;
 
 import net.bitacademy.java41.annotations.Component;
@@ -38,37 +37,34 @@ public class MemberService {
 
 		}
 	}
-
 	public List<Member> getMemberList() throws Exception {
-		//return memberDao.list();
-		return null;
+		return memberDao.list();
 	}
 
 	public Member getMember(String email) throws Exception {
-		//return memberDao.get(email);
-		return null;
+		return memberDao.get(email);
+		
 	}
 
 	public boolean changePassword(
 			String email, String oldPassword, String newPassword) throws Exception {
-		//		if (memberDao.changePassword(email, oldPassword, newPassword) > 0) {
-		//			return true;
-		//		} else {
-		//			return false;
-		//		}
-		return true;
+			if (memberDao.changePassword(email, oldPassword, newPassword) > 0) {
+					return true;
+				} else {
+				return false;
+			}
+	
 	}
 
 	public int delete(String email)throws Exception{
-		//		return memberDao.delete(email);
-		return (Integer) null;
+		return 	memberDao.delete(email);
+		
 	}
 
 	public int memberUpdate(String name, String tel, String blog,
 			String detailAddress, String tag, String email, int level) throws Exception{
-		//		return memberDao.memberUpdate(name, tel, blog, detailAddress, tag, email, level);
-		return (Integer) null;
+		return memberDao.memberUpdate(name, tel, blog, detailAddress, tag, email, level);
+		
 	}
-
 
 }

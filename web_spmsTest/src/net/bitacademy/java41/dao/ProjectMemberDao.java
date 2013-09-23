@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -66,12 +67,12 @@ public class ProjectMemberDao {
 
 	}
 
-	public ArrayList<ProjectMember> getView(int no) throws Exception {
+	public List<ProjectMember> getView(int no) throws Exception {
 
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 
 		try {
-			return sqlSession.selectOne("net.bitacademy.java41.dao.ProjectMapper.getView", no);	
+			return sqlSession.selectList("net.bitacademy.java41.dao.ProjectMapper.getView", no);	
 
 		} catch (Exception e) {
 			throw e;

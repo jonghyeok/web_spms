@@ -25,6 +25,7 @@ public class updateMyInfoControl implements PageControl {
 		
 		Member member = memberService.getMember(params.get("email")[0]);
 		
+		System.out.println(params.get("email")[0]);
 		System.out.println(member.getEmail());
 		
 		String pwd = params.get("password")[0]; 
