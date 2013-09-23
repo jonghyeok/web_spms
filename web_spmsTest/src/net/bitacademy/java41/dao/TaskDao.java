@@ -6,11 +6,12 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.bitacademy.java41.annotations.Component;
 import net.bitacademy.java41.util.DBConnectionPool;
 import net.bitacademy.java41.vo.Task;
 
 import com.mysql.jdbc.Statement;
-
+@Component
 public class TaskDao {
 
 	DBConnectionPool conPool;
@@ -19,15 +20,13 @@ public class TaskDao {
 		this.conPool = conPool;
 		return this;
 	}
-
+	
 	public TaskDao() {
 	}
-
+	
 	public TaskDao(DBConnectionPool conPool) {
 		this.conPool = conPool;
 	}
-
-	
 	
 	public int updateTask(Task task)throws Exception{
 		
@@ -163,13 +162,14 @@ public class TaskDao {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		String sql = "select t1.TNO, t1.PNO, t1.TITLE, t2.EMAIL, t1.START_DATE, t1.UIPROTOURL, t1.CONTENT, t1.END_DATE, t1.DRAW_DATE, t1.STATUS " +
-				" from spms_tasks t1, spms_membtask t2 where t1.PNO = t2.PNO and t1.TNO = ?;";
+				" from spms_tasks t1, spms_membtask t2 where t1.TNO = ? and t2.TNO = ?;";
 
 		try {
 			con = conPool.getConnection();
 			stmt = con
 				.prepareStatement(sql);
 			stmt.setInt(1, no);
+			stmt.setInt(2, no);
 			rs = stmt.executeQuery();
 			System.out.println("ss");
 			if (rs.next()) {
@@ -273,39 +273,7 @@ public class TaskDao {
 	
 	
 	
-	public int fileUpdateTask(Task task)throws Exception{
-
-		System.out.println(task.getUiProtoUrl());
-		
-		Connection con = null;
-		PreparedStatement stmt = null;
-		
-		
-
-
-		String sql="update spms_tasks set  " +
-				" TUIPROTOURL=? DRAW_DATE=now()" +
-				" where TNO=?;";
-
-		try {
-			con = conPool.getConnection();
-			stmt = con	.prepareStatement(sql);
-			
-			stmt.setString(1, task.getUiProtoUrl());
-			stmt.setInt(2, task.getTno());
-			
-			System.out.println("file update sql 완료.");
-			
-			return stmt.executeUpdate();
-			
-			
-		}catch(Exception e){
-			throw e;
-		}finally{
-			try {	stmt.close();} catch (Exception e) {}
-		}
-		
-	}
+	
 	
 	
 	

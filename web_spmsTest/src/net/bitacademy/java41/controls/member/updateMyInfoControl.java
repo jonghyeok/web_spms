@@ -2,10 +2,11 @@ package net.bitacademy.java41.controls.member;
 
 import java.util.Map;
 
+import net.bitacademy.java41.annotations.Component;
 import net.bitacademy.java41.controls.PageControl;
 import net.bitacademy.java41.services.MemberService;
 import net.bitacademy.java41.vo.Member;
-
+@Component("/member/updateMyInfo.do")
 public class updateMyInfoControl implements PageControl {
 	
 	MemberService memberService;

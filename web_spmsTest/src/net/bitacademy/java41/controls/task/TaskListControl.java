@@ -3,10 +3,11 @@ package net.bitacademy.java41.controls.task;
 import java.util.List;
 import java.util.Map;
 
+import net.bitacademy.java41.annotations.Component;
 import net.bitacademy.java41.controls.PageControl;
 import net.bitacademy.java41.services.TaskService;
 import net.bitacademy.java41.vo.Task;
-
+@Component("/task/list.do")
 public class TaskListControl implements PageControl{
 
 	TaskService taskService;

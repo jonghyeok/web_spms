@@ -1,8 +1,9 @@
 package net.bitacademy.java41.services;
 
+import net.bitacademy.java41.annotations.Component;
 import net.bitacademy.java41.dao.MemberDao;
 import net.bitacademy.java41.vo.Member;
-
+@Component
 public class AuthService {
 	MemberDao memberDao;
 	
@@ -12,7 +13,6 @@ public class AuthService {
 	}
 	
 	public Member getUserInfo(String email, String password) throws Exception {
-		System.out.println("AUTH서비스 진입");
 		return memberDao.getMember(email, password);
 	}
 }

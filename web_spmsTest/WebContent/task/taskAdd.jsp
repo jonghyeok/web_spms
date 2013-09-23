@@ -12,7 +12,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 
-
 <script type="text/javascript">
 function updateSlider(slideAmount) {
 //get the element
@@ -22,15 +21,11 @@ display.innerHTML=slideAmount+"%";
 }
 </script>
 
-
-
-
-
-
 <title>SPMS</title>
 <link rel="stylesheet" href="${rootPath}/css/style.css">
 </head>
 <body>
+
 <jsp:include page="/header.jsp"></jsp:include>
 
 <jsp:include page="/sidebar.jsp"></jsp:include>
@@ -41,10 +36,9 @@ display.innerHTML=slideAmount+"%";
 <a href="../task/list.do?no=${pno}">[작업들]</a> |
 <a href="../feed/list.do?projectNo=${pno}">[게시판]</a>
 
-
 <h3>Task 추가</h3>
 
-<form action="add2.do?pno=${pno}" method="post">
+<form action="add2.do?pno=${pno}" method="post" enctype="multipart/form-data">
 
 Project No.${pno} <input type="text" name="pno" value="${pno}" readonly> 
 Writener <input type="text" name="email" value="${member.email}" readonly>

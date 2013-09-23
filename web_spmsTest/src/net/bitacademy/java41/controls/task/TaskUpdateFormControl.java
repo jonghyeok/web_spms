@@ -2,10 +2,11 @@ package net.bitacademy.java41.controls.task;
 
 import java.util.Map;
 
+import net.bitacademy.java41.annotations.Component;
 import net.bitacademy.java41.controls.PageControl;
 import net.bitacademy.java41.services.TaskService;
 import net.bitacademy.java41.vo.Task;
-
+@Component("/task/update.do")
 public class TaskUpdateFormControl implements PageControl {
 
 	TaskService taskService;

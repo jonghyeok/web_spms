@@ -3,10 +3,11 @@ package net.bitacademy.java41.controls.task;
 import java.sql.Date;
 import java.util.Map;
 
+import net.bitacademy.java41.annotations.Component;
 import net.bitacademy.java41.controls.PageControl;
 import net.bitacademy.java41.services.TaskService;
 import net.bitacademy.java41.vo.Task;
-
+@Component("/task/update2.do")
 public class TaskUpdateControl implements PageControl{
 
 

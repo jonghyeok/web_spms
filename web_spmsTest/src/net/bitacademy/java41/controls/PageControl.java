@@ -7,6 +7,7 @@ import java.util.Map;
  * - 사용자의 요청을 페이지 컨트롤러에 위임할 때, 
  *   파라미터 데이터를 Map에 담아서 넘긴다. 
  */
+
 public interface PageControl {
 	String execute(Map<String,Object> model) throws Exception;
 }

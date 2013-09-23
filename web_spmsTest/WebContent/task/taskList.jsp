@@ -14,6 +14,7 @@
 
 <jsp:include page="/sidebar.jsp"></jsp:include>
 
+
 <div id="content">
 <h1>TASK...</h1>
 <a href="../project/view.do?no=${pno}">[기본정보]</a> |

@@ -68,7 +68,7 @@ ${project.content }<br>
 <a href="update.do?no=${project.no}">[변경]</a>
 <a href="delete.do?no=${project.no}">[삭제]</a>
 </c:when>
-<c:otherwise>손님</c:otherwise>
+<c:otherwise>[손님]</c:otherwise>
 </c:choose>
 
 </p>

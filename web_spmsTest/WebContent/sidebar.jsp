@@ -1,12 +1,23 @@
-<%@page import="net.bitacademy.java41.vo.MemberProject"%>
-<%@page import="net.bitacademy.java41.vo.Member"%>
+<%@ page import="net.bitacademy.java41.vo.MemberProject"%>
+<%@ page import="net.bitacademy.java41.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <jsp:useBean id="member" type="net.bitacademy.java41.vo.Member" scope="session"/>
 <jsp:useBean id="projectService" type="net.bitacademy.java41.services.ProjectService" scope="application"/>  
 <% pageContext.setAttribute("myprojects", projectService.getMyProjects(member.getEmail()));%>	
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <div class="main_nav">
-<img id="memberPhoto" src="${rootPath}/images/images.jpg">
+
+<c:choose>
+	<c:when test="${member.photos != null || member.photos[0] != '' }">
+		<img id="memberPhoto" src="${rootPath}/file/${member.photos[0]}">
+	</c:when>
+	
+	<c:otherwise>
+		<img id="memberPhoto" src="${rootPath}/images/test01.png">
+	</c:otherwise>
+</c:choose>
+
 <div id="memberInfo">
 <p id="name"><a href="${rootPath}/member/updateMyInfoForm.do?email=${member.email }">${member.name}</a></p>
 <p id="tel">${member.tel }</p>

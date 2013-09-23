@@ -2,9 +2,10 @@ package net.bitacademy.java41.controls.member;
 
 import java.util.Map;
 
+import net.bitacademy.java41.annotations.Component;
 import net.bitacademy.java41.controls.PageControl;
 import net.bitacademy.java41.vo.Member;
-
+@Component("/member/updateMyInfoForm.do")
 public class updateMyInfoFormControl implements PageControl {
 	
 	@Override

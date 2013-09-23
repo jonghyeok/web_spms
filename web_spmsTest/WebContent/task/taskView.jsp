@@ -17,7 +17,6 @@
 
 <div class="content">
 
-
 <a href="../project/view.do?no=${task.pno}">[기본정보]</a> |
 <a href="../task/list.do?no=${task.pno}">[작업들]</a> |
 <a href="..//task/add.do?no=${task.pno}">[테스크 추가]</a>

@@ -4,10 +4,11 @@ import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 
+import net.bitacademy.java41.annotations.Component;
 import net.bitacademy.java41.controls.PageControl;
 import net.bitacademy.java41.dao.ProjectDao;
 import net.bitacademy.java41.services.ProjectService;
-
+@Component("/project/delete.do")
 public class ProjectDeleteControl implements PageControl {
 	ProjectService projectService;
 

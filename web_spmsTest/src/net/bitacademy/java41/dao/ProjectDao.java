@@ -3,192 +3,93 @@ package net.bitacademy.java41.dao;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
-import net.bitacademy.java41.util.DBConnectionPool;
+import net.bitacademy.java41.annotations.Component;
 import net.bitacademy.java41.vo.MemberProject;
 import net.bitacademy.java41.vo.Project;
 
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+@Component
 public class ProjectDao {
-	DBConnectionPool conPool;
-
-	
-	public ProjectDao setDBConnectionPool(DBConnectionPool conPool) {
-		this.conPool = conPool;
-		return this;
+	SqlSessionFactory sqlSessionFactory;
+		
+	public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
+		this.sqlSessionFactory = sqlSessionFactory;
 	}
-	
+
 	public ProjectDao() {}
 	
-	public ProjectDao(DBConnectionPool conPool) {
-		this.conPool = conPool;
-	}
-	
 	public List<Project> list() throws Exception {
-		Connection con = null;
-		Statement stmt = null;
-		ResultSet rs = null;
-		
-		ArrayList<Project> list = new ArrayList<Project>();
+		SqlSession sqlSession = sqlSessionFactory.openSession();
 
 		try {
-			con = conPool.getConnection();
-			stmt = con.createStatement();
-			rs = stmt.executeQuery(
-					"select PNO,TITLE,CONTENT,START_DATE,END_DATE"
-					+ " from SPMS_PRJS"
-					+ " order by PNO desc");
+			return sqlSession.selectList("net.bitacademy.java41.dao.ProjectMapper.list");	
 			
-			while(rs.next()) {
-				list.add(new Project()
-							.setNo(rs.getInt("PNO"))
-							.setTitle(rs.getString("TITLE"))
-							.setContent(rs.getString("CONTENT"))
-							.setStartDate(rs.getDate("START_DATE"))
-							.setEndDate(rs.getDate("END_DATE")));
-			}
-			
-			return list;
 		} catch (Exception e) {
 			throw e;
 			
 		} finally {
-			try {rs.close();} catch (Exception e) {}
-			try {stmt.close();} catch (Exception e) {}
-			if (con != null) {
-				conPool.returnConnection(con);
-			}
+			try {sqlSession.close();} catch (Exception e) {}
 		}
 	}
 	
 	public Project get(int no) throws Exception {
-		Connection con = null;
-		PreparedStatement stmt = null;
-		ResultSet rs = null;
+		
+		SqlSession sqlSession = sqlSessionFactory.openSession();
 		
 		try {
-			con = conPool.getConnection();
-			stmt = con.prepareStatement(
-					"select PNO,TITLE,CONTENT,START_DATE,END_DATE,TAG"
-							+ " from SPMS_PRJS"
-							+ " where PNO=?");
-			stmt.setInt(1, no);
-			rs = stmt.executeQuery();
-			
-			if (rs.next()) {
-				return new Project()
-							.setNo(rs.getInt("PNO"))
-							.setTitle(rs.getString("TITLE"))
-							.setContent(rs.getString("CONTENT"))
-							.setStartDate(rs.getDate("START_DATE"))
-							.setEndDate(rs.getDate("END_DATE"))
-							.setTag(rs.getString("TAG"));
-			} else {
-				return null;
-			}
+			return sqlSession.selectOne("net.bitacademy.java41.dao.ProjectMapper.get", no);
 			
 		} catch (Exception e) {
 			throw e;
 			
 		} finally {
-			try {rs.close();} catch (Exception e) {}
-			try {stmt.close();} catch (Exception e) {}
-			if (con != null) {
-				conPool.returnConnection(con);
-			}
+			try {sqlSession.close();} catch (Exception e) {}
 		}
 	}
 	
 	public List<MemberProject> listByMember(String email) throws Exception {
-		Connection con = null;
-		PreparedStatement stmt = null;
-		ResultSet rs = null;
+		SqlSession sqlSession = sqlSessionFactory.openSession();
 		
-		ArrayList<MemberProject> list = new ArrayList<MemberProject>();
-
 		try {
-			con = conPool.getConnection();
 			
-			String sql = "select t1.PNO,t1.TITLE,t2.LEVEL ";
-			sql += " from SPMS_PRJS t1, SPMS_PRJMEMB t2 ";
-			sql += " where t1.PNO=t2.PNO ";
-			sql += " and t2.EMAIL=?";
+			return sqlSession.selectList(
+					"net.bitacademy.java41.dao.ProjectMapper.listByMember", email);
 			
-			stmt = con.prepareStatement(sql);
-			stmt.setString(1, email);
-			rs = stmt.executeQuery();
-			
-			while(rs.next()) {
-				list.add(new MemberProject()
-							.setNo(rs.getInt("PNO"))
-							.setTitle(rs.getString("TITLE"))
-							.setLevel(rs.getInt("LEVEL")));
-			}
-			
-			return list;
 		} catch (Exception e) {
 			throw e;
 			
 		} finally {
-			try {rs.close();} catch (Exception e) {}
-			try {stmt.close();} catch (Exception e) {}
-			if (con != null) {
-				conPool.returnConnection(con);
-			}
+			try {sqlSession.close();} catch (Exception e) {}
 		}
 	}
 	
 	public int add(Project project) throws Exception {
-		Connection con = null;
-		PreparedStatement projectStmt = null;
-		PreparedStatement projectMemberStmt = null;
-		ResultSet rs = null;
+		SqlSession sqlSession = sqlSessionFactory.openSession();
 		
 		try {
-			con = this.conPool.getConnection();
+			sqlSession.insert("net.bitacademy.java41.dao.ProjectMapper.add", project);
 			
-			// 1. 프로젝트를 등록한다.
-			projectStmt = con.prepareStatement(
-				"insert into SPMS_PRJS("
-				+ " TITLE,CONTENT,START_DATE,END_DATE,TAG)"
-				+ " values(?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
-			projectStmt.setString(1, project.getTitle());
-			projectStmt.setString(2, project.getContent());
-			projectStmt.setDate(3, project.getStartDate());
-			projectStmt.setDate(4, project.getEndDate());
-			projectStmt.setString(5, project.getTag());
-			projectStmt.executeUpdate();
+			HashMap<String,Object> paramMap = new HashMap<String,Object>();
 			
-			// * 자동 생성된 PK 값 알아내기
-			rs = projectStmt.getGeneratedKeys();
-			if (rs.next()) {
-				project.setNo( rs.getInt(1) );
-			}
+			paramMap.put("email", project.getLeader());
+			paramMap.put("projectNo", project.getNo());
+			paramMap.put("memberLevel", 0);
 			
-			// 2. 프로젝트의 PL을 등록한다.
-			projectMemberStmt = con.prepareStatement(
-					"insert into SPMS_PRJMEMB("
-					+ " EMAIL,PNO,LEVEL)"
-					+ " values(?,?,0)");
-			projectMemberStmt.setString(1, project.getLeader());
-			projectMemberStmt.setInt(2, project.getNo());
-			projectMemberStmt.executeUpdate();
+			sqlSession.insert("net.bitacademy.java41.dao.ProjectMapper.addProjectMember", paramMap);
 			
+			sqlSession.commit();
 			return project.getNo();
 			
 		} catch (Exception e) {
+			sqlSession.rollback();
 			throw e;
 			
 		} finally {
-			try {rs.close();} catch(Exception e) {}
-			try {projectStmt.close();} catch(Exception e) {}
-			try {projectMemberStmt.close();} catch(Exception e) {}
-			if (con != null && con.getAutoCommit()) {
-				conPool.returnConnection(con);
-			}
+			try {sqlSession.close();} catch(Exception e) {}
 		}
 	}
 	
@@ -198,7 +99,6 @@ public class ProjectDao {
 		PreparedStatement stmt = null;
 		
 		try {
-			con = conPool.getConnection();
 			stmt = con.prepareStatement(
 				"update SPMS_PRJS set"
 				+ " TITLE=?,CONTENT=?,START_DATE=?,END_DATE=?,TAG=?"
@@ -216,9 +116,6 @@ public class ProjectDao {
 		
 		} finally {
 			try {stmt.close();} catch(Exception e) {}
-			if (con != null) {
-				conPool.returnConnection(con);
-			}
 		}
 	}
 	public int delete(int no) throws Exception {
@@ -226,7 +123,6 @@ public class ProjectDao {
 		PreparedStatement stmt = null;
 		
 		try {
-			con = conPool.getConnection();
 			stmt=con.prepareStatement("SET FOREIGN_KEY_CHECKS=0;");
 			stmt.executeUpdate();
 			
@@ -242,9 +138,6 @@ public class ProjectDao {
 			
 		} finally {
 			try {stmt.close();} catch(Exception e) {}
-			if (con != null) {
-				conPool.returnConnection(con);
-			}
 		}
 	}
 /*

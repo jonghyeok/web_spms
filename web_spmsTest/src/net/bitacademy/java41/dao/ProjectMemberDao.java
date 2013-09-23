@@ -5,23 +5,24 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+
+import net.bitacademy.java41.annotations.Component;
 import net.bitacademy.java41.util.DBConnectionPool;
 import net.bitacademy.java41.vo.ProjectMember;
-
+@Component
 public class ProjectMemberDao {
-	DBConnectionPool conPool;
-
-	public ProjectMemberDao setDBConnectionPool(DBConnectionPool conPool){
-		this.conPool=conPool;
-		return this;
+	SqlSessionFactory sqlSessionFactory;
+	
+	
+	public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
+		this.sqlSessionFactory = sqlSessionFactory;
 	}
+
 	
 	public ProjectMemberDao(){}
 	
-	public ProjectMemberDao(DBConnectionPool conPool) {
-		this.conPool = conPool;
-	}
-
 	public ArrayList<ProjectMember> getView(String email) throws Exception {
 
 		Connection con = null;
@@ -32,7 +33,6 @@ public class ProjectMemberDao {
 
 		try {
 			ProjectMember pm;
-			con = conPool.getConnection();
 			stmt = con.prepareStatement("SET FOREIGN_KEY_CHECKS=0;");
 
 			stmt = con
@@ -62,74 +62,26 @@ public class ProjectMemberDao {
 				stmt.close();
 			} catch (Exception e) {
 			}
-			if (con != null) {
-				conPool.returnConnection(con);
-			}
 		}
 
 	}
 
 	public ArrayList<ProjectMember> getView(int no) throws Exception {
 
-		Connection con = null;
-		PreparedStatement stmt = null;
-		ResultSet rs = null;
-
-		ArrayList<ProjectMember> data = new ArrayList<ProjectMember>();
-
-		String sql = "select t1.email,t1.level,t2.MNAME,t2.TEL,t2.BLOG"
-				+ " from SPMS_PRJMEMB t1, SPMS_MEMBS t2"
-				+ " where t1.PNO=? and t1.EMAIL=t2.EMAIL;";
+		SqlSession sqlSession = sqlSessionFactory.openSession();
 
 		try {
-			ProjectMember pm;
-			con = conPool.getConnection();
-			stmt = con.prepareStatement(sql);
-
-			stmt.setInt(1, no);
-
-			rs = stmt.executeQuery();
-
-			String blog;
-
-			while (rs.next()) {
-
-				if (rs.getString("BLOG") == null) {
-					blog = " ";
-				} else {
-					blog = rs.getString("BLOG");
-				}
-
-				pm = new ProjectMember();
-				pm.setPno(no);
-				pm.setEmail(rs.getString("EMAIL"));
-				pm.setLevel(rs.getInt("LEVEL"));
-				pm.setName(rs.getString("MNAME"));
-				pm.setTel(rs.getString("TEL"));
-				pm.setBlog(blog);
-				System.out.println(no + " " + pm.getEmail() + " "
-						+ pm.getLevel() + " " + pm.getName() + " "
-						+ pm.getBlog());
-				data.add(pm);
-			}
-
-			return data;
+			return sqlSession.selectOne("net.bitacademy.java41.dao.ProjectMapper.getView", no);	
 
 		} catch (Exception e) {
 			throw e;
 
 		} finally {
 			try {
-				rs.close();
+				sqlSession.close();
 			} catch (Exception e) {
 			}
-			try {
-				stmt.close();
-			} catch (Exception e) {
-			}
-			if (con != null) {
-				conPool.returnConnection(con);
-			}
+			
 		}
 
 	}

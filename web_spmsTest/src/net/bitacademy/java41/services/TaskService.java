@@ -2,9 +2,10 @@ package net.bitacademy.java41.services;
 
 import java.util.List;
 
+import net.bitacademy.java41.annotations.Component;
 import net.bitacademy.java41.dao.TaskDao;
 import net.bitacademy.java41.vo.Task;
-
+@Component
 public class TaskService {
 	
 	

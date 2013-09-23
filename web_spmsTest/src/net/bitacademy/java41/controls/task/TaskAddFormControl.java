@@ -2,8 +2,9 @@ package net.bitacademy.java41.controls.task;
 
 import java.util.Map;
 
+import net.bitacademy.java41.annotations.Component;
 import net.bitacademy.java41.controls.PageControl;
-
+@Component("/task/add.do")
 public class TaskAddFormControl implements PageControl {
 
 	public String execute(Map<String, Object> model) throws Exception {

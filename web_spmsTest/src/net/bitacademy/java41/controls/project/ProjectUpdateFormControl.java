@@ -2,10 +2,11 @@ package net.bitacademy.java41.controls.project;
 
 import java.util.Map;
 
+import net.bitacademy.java41.annotations.Component;
 import net.bitacademy.java41.controls.PageControl;
 import net.bitacademy.java41.services.ProjectService;
 import net.bitacademy.java41.vo.Project;
-
+@Component("/project/update.do")
 public class ProjectUpdateFormControl implements PageControl {
 	ProjectService projectService;
 
