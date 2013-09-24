@@ -8,15 +8,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <div class="main_nav">
 
-<c:choose>
-	<c:when test="${member.photos != null || member.photos[0] != '' }">
-		<img id="memberPhoto" src="${rootPath}/file/${member.photos[0]}">
-	</c:when>
-	
-	<c:otherwise>
-		<img id="memberPhoto" src="${rootPath}/images/test01.png">
-	</c:otherwise>
-</c:choose>
+<img onerror="this.src='${rootPath}/images/images.jpg';" id="memberPhoto" src="${rootPath}/file/${member.photos[0]}" >
 
 <div id="memberInfo">
 <p id="name"><a href="${rootPath}/member/updateMyInfoForm.do?email=${member.email }">${member.name}</a></p>

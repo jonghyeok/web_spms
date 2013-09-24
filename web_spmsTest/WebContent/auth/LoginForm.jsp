@@ -5,10 +5,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+
 <meta charset="UTF-8">
 <title>로그인</title>
 </head>
 <body>
+
+
+
 <h1>사용자 로그인 - 2조</h1> 
 <form action='login.do' method="post"> 
 Email: <input type="text" name="email"
