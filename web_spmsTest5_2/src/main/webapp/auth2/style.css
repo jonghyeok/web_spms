@@ -1,0 +1,130 @@
+﻿/*  
+Theme Name: IPhone Login
+Theme URL: http://www.
+Description: 
+Version: 1.0
+Author: Aafrin
+Author URI: www.aafrin.com
+
+*/
+
+
+body
+{
+	margin:auto;
+	padding:0;
+	background-image:url('images/bg.jpg');
+	background-repeat:repeat;
+}
+
+#login
+{
+	margin:auto;
+	padding:0;
+	background-image:url('images/login.png');
+	width:346px;
+	height:650px;
+	margin-top:0px;
+	
+}
+
+
+.logo
+{
+	margin-top:125px;
+	margin-left:77px;
+	margin-bottom:0px;
+	float:left;
+	border-width:0px;
+
+}
+.user {
+	color:white;
+	font-size:25px;
+	margin-top:30px;
+	margin-left:55px;
+	margin-bottom:0px;
+	float:left;
+}
+
+.userbox {
+	color:black;
+	font-size:21px;
+	margin-top:0px;
+	margin-left:55px;
+	float:left;
+}
+
+.pass
+{
+	color:white;
+	font-size:30px;
+	margin-top:10px;
+	margin-left:55px;
+	margin-bottom:0px;
+	float:left;
+
+}
+
+.passbox
+{
+	color:white;
+	font-size:30px;
+	margin-top:10px;
+	margin-left:55px;
+	float:left;
+
+}
+
+.btnLogin
+{
+	background-image:url("images/btnLogin.png");
+	background-repeat: no-repeat;
+	margin-top:20px;
+	margin-left:60px;
+	margin-bottom:15px;
+	background-position:  0px 0px;
+    background-repeat: no-repeat;
+    width: 224px;
+    height: 45px;
+    border: 0px;
+	 
+	 
+	float:left;
+	border-width:0px;
+
+}
+
+.cRight{
+	
+
+	color:white;
+	font-size:10px;
+	margin-top:10px;
+	margin-left:55px;
+	float:left;
+	margin:auto;
+
+}
+
+#links
+{
+	color:white;
+	font-size:15px;
+	margin-top:0px;
+	margin-right:55px;
+	float:right;
+
+}
+
+#links a
+{
+	text-decoration:none;
+	color:gray;
+
+}
+
+#links a:hover
+{
+	text-decoration:underline;
+}
