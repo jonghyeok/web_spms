@@ -1,0 +1,35 @@
+/* Non-essential Styles */
+h2      { margin:0; font-size:1.1em; margin-bottom:5px; }
+h3      { margin:0; font-size:1em;   }
+p,ul,dl { margin-top:5px; margin-bottom:0; }
+
+
+.oi { background-color:AFA3DC; padding:1px; 
+       border-left:0px solid gray; border-right:0px solid black; 
+       border-top:0px solid gray; border-bottom:0px solid black; }
+
+.float-divider  { clear:both; height:1px; font-size:1px; line-height:1px; }
+
+#main1 { background-color:9889D1; padding: 5px 10px; font-size:12
+        border-left:0px solid gray; border-right:0px solid black; 
+        border-top:0px solid gray; border-bottom:0px solid black; width:50%; min-width:200px;}
+
+#faq        { float:left; width:100%; min-width:180px;  }
+#faq  .oi  { margin:0; padding:5px; }
+
+#info       { float:left; width:100%; min-width:180px; }
+#info  .oi { margin-left:20px; padding:5px; }
+
+
+/* Essential Styles */
+
+.rollup-trigger       { cursor:pointer; }
+.rollup-trigger:hover { color:firebrick; }
+
+span.rollup-trigger    { font-size:0.65em; padding-left:50px; 
+                         background:url("hide.gif") no-repeat left top;width:60%; max-width:80px; }
+span.rolledup          { background:url("show.gif") no-repeat left top; width:60%;max-width:80px;}
+
+.hidden               { position:absolute; top:-99999px; left:-99999px; 
+                         width:1px; height:1px; overflow:hidden; }
+
