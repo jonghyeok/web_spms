@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.bitacademy.java41.dao.FeedDao">
+	
+	<select id="list" parameterType="int" resultType="Feed">
+		select FNO, CONTENT, REG_DATE as regDate, email, pno 
+		from spms_feeds where pno=#{pno} ORDER by fno DESC
+	</select>
+
+	<insert id="add" parameterType="Feed" useGeneratedKeys="true">
+		insert into SPMS_FEEDS(CONTENT,REG_DATE,EMAIL,PNO)
+		values(#{content},now(),#{email},#{pno})
+	</insert>
+	
+	
+	
+	<delete id="delete" parameterType="int">
+		delete from SPMS_FEEDS 
+		where FNO=#{value}
+	</delete>
+	
+	
+<!-- 
+	<update id="update" parameterType="Feed">
+			update SPMS_PRJS
+		<set>
+			<if test="content != null">CONTENT=#{content},</if>
+	 		<if test="regDate != null">REG_DATE=#{regDate},</if>
+			<if test="email != null">END_DATE=#{email},</if>
+			<if test="pno != null">PNO=#{pno}</if>
+		</set>
+		where PNO=#{no}
+	</update>
+-->	
+</mapper>
+
